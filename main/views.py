@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,HttpResponse
 import uuid
 from .models import LinksMapper
 
@@ -11,6 +11,7 @@ def shorten (request):
         short_url=str(uuid.uuid4())[:10]
         new_link=LinksMapper(link=url,short=short_url)
         new_link.save()
+        short_url="go/"+short_url
         context={"short_url":short_url}
         return render(request, "home.html",context)
         
